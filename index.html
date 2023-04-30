@@ -1,0 +1,38 @@
+<html>
+<head>
+<script>
+var DHSform = "";
+
+function getLocation(form) {	
+  DHSform = form; 				
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    alert("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+   var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+
+         if (this.readyState == 4 && this.status == 200) {
+             url = this.responseText.replace('"', '');
+             url = url.replace('"', '');
+             window.open(url, '_self');
+         }
+    };
+
+    url = 'https://w3brzdccee.execute-api.us-east-2.amazonaws.com/DHS/'+"?lat=" + position.coords.latitude + "&long=" + position.coords.longitude;
+    xhttp.open("GET", url, true);
+    xhttp.send(); 
+}
+</script>
+</head>
+<body>
+<button onclick='getLocation("I-130");'>Form I-130</button>
+<button>Form I-500</button>
+<button>Form I-600</button>
+<button>Form I-170</button>
+</body>
+</html>

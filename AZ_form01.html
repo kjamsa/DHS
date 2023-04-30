@@ -1,0 +1,9 @@
+<html>
+<body>
+</body>
+<script>
+let str = window.location.pathname;
+let position = str.search("_form") - 2;
+document.write("<h1>DHS Form 130 for " + str.substring(position, position+2));
+</script>
+</html>
